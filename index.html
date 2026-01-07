@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Saturn Music — independent label. Atmosphere, sound, identity." />
+  <title>Saturn Music</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f6f2ea;
+      --ink: #242424;
+      --muted: #6b6b6b;
+      --line: rgba(36,36,36,.14);
+      --card: rgba(255,255,255,.55);
+      --shadow: 0 10px 30px rgba(0,0,0,.06);
+      --radius: 18px;
+      --max: 1080px;
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+    }
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(36,36,36,.06), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(36,36,36,.045), transparent 60%),
+        radial-gradient(circle at 50% 90%, rgba(36,36,36,.04), transparent 60%);
+      mix-blend-mode:multiply;
+      opacity:.9;
+    }
+    a{ color: inherit; text-decoration: none; }
+    a.underline{ text-decoration: underline; text-underline-offset: 4px; }
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 22px; position:relative; }
+
+    header{
+      position: sticky; top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(246,242,234,.72);
+      border-bottom: 1px solid var(--line);
+      z-index: 20;
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 210px;
+    }
+    .brand img{
+      width: 36px; height: 36px; border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      border: 1px solid rgba(36,36,36,.12);
+      background: rgba(255,255,255,.35);
+      object-fit: cover;
+    }
+    .brand h1{
+      margin:0;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+    }
+    .links{
+      display:flex; align-items:center; gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .links a{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+    .links a:hover{
+      color: var(--ink);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+    .cta{
+      border: 1px solid rgba(36,36,36,.28);
+      color: var(--ink) !important;
+      background: rgba(255,255,255,.45);
+    }
+
+    .hero{ padding: 70px 0 42px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.4fr .9fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .hero h2{
+      margin: 0 0 10px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.02;
+      letter-spacing: 0.01em;
+    }
+    .hero p{
+      margin: 0 0 18px;
+      color: rgba(36,36,36,.78);
+      font-size: 15px;
+      max-width: 58ch;
+    }
+    .pill-row{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .pill{
+      border: 1px solid var(--line);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      color: rgba(36,36,36,.70);
+      background: rgba(255,255,255,.42);
+    }
+
+    section{ padding: 52px 0; border-top: 1px solid var(--line); }
+    .panel, .card{
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .panel .kicker{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .panel h3{ margin: 0 0 10px; font-size: 14px; font-weight: 500; }
+    .panel ul{ margin: 0; padding-left: 18px; color: rgba(36,36,36,.75); font-size: 13.5px; }
+
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 14px; margin-bottom: 16px;
+    }
+    .section-head h3{
+      margin:0;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: 28px;
+    }
+    .section-head p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 52ch;
+    }
+
+    .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .card{ padding: 16px; transition: transform .18s ease; background: rgba(255,255,255,.45); }
+    .card:hover{ transform: translateY(-2px); }
+
+    .title{ display:flex; align-items:center; justify-content:space-between; gap: 10px; margin-bottom: 8px; }
+    .card b{ font-size: 14px; }
+    .tag{
+      font-size: 12px;
+      color: rgba(36,36,36,.65);
+      border: 1px solid var(--line);
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.35);
+      white-space: nowrap;
+    }
+    .meta{ font-size: 13px; color: rgba(36,36,36,.73); margin: 0 0 12px; }
+    .btn-row{ display:flex; flex-wrap:wrap; gap: 8px; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 13px;
+      border: 1px solid rgba(36,36,36,.22);
+      background: rgba(255,255,255,.52);
+      transition: .18s ease;
+      cursor:pointer;
+    }
+    .btn:hover{ background: rgba(255,255,255,.70); }
+    .btn.secondary{
+      border-color: var(--line);
+      color: rgba(36,36,36,.75);
+      background: rgba(255,255,255,.35);
+    }
+
+    /* Latest release */
+    .latest{
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      align-items:center;
+    }
+    .cover{
+      width: 160px; height: 160px; border-radius: 16px;
+      border: 1px solid rgba(36,36,36,.14);
+      background: rgba(255,255,255,.40);
+      box-shadow: 0 14px 30px rgba(0,0,0,.10);
+      object-fit: cover;
+    }
+
+    /* Form (real endpoint) */
+    form{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    label{ font-size: 12px; color: var(--muted); display:block; margin-bottom: 6px; }
+    input, textarea{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 12px 12px;
+      background: rgba(255,255,255,.55);
+      outline: none;
+      font: inherit;
+      color: var(--ink);
+    }
+    textarea{ min-height: 120px; resize: vertical; grid-column: 1 / -1; }
+    .form-actions{ grid-column: 1 / -1; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .small{ font-size: 12px; color: rgba(36,36,36,.65); }
+
+    footer{
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--line);
+      color: rgba(36,36,36,.70);
+      font-size: 13px;
+    }
+    .footer-row{ display:flex; justify-content:space-between; gap: 14px; flex-wrap:wrap; align-items:center; }
+
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      form{ grid-template-columns: 1fr; }
+      .latest{ grid-template-columns: 1fr; }
+      .cover{ width: 100%; height: auto; aspect-ratio: 1 / 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Saturn Music home">
+          <img src="./assets/saturn-logo.png" alt="Saturn Music logo" />
+          <h1>Saturn Music</h1>
+        </a>
+
+        <nav class="links" aria-label="Primary">
+          <a href="#artists">Artists</a>
+          <a href="#releases">Releases</a>
+          <a href="#about">About</a>
+          <a href="#press">Press Kit</a>
+          <a class="cta" href="#demo">Submit Demo</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container">
+      <section class="hero" style="border-top:none;">
+        <div class="hero-grid">
+          <div>
+            <h2>Independent label.<br/>Atmosphere, sound, identity.</h2>
+            <p>
+              Saturn Music — независимый лейбл для артистов, которым важны
+              <span class="underline">идея</span>, <span class="underline">звук</span> и
+              <span class="underline">целостная эстетика</span>. Мы строим каталоги как орбиту — аккуратно, последовательно.
+            </p>
+
+            <div class="btn-row">
+              <a class="btn" href="#releases">Listen</a>
+              <a class="btn secondary" href="#demo">Send demo</a>
+              <a class="btn secondary" href="#press">Press kit</a>
+            </div>
+
+            <div class="pill-row" aria-label="Genres">
+              <span class="pill">Indie / Alternative</span>
+              <span class="pill">Electronic / Downtempo</span>
+              <span class="pill">Ambient</span>
+              <span class="pill">Lo-fi / Experimental</span>
+              <span class="pill">Art hip-hop</span>
+            </div>
+          </div>
+
+          <aside class="panel" aria-label="Label notes">
+            <div class="kicker">Saturn Music</div>
+            <h3>Как мы работаем</h3>
+            <ul>
+              <li>релиз-планирование и дистрибуция</li>
+              <li>единая визуальная айдентика</li>
+              <li>честные условия и прозрачные сплиты</li>
+              <li>продвижение через плейлисты и короткий контент</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <!-- LATEST RELEASE -->
+    <div class="container">
+      <section id="latest">
+        <div class="section-head">
+          <h3>Latest release</h3>
+          <p>Подставь обложку и ссылки — это самый “живой” блок сайта.</p>
+        </div>
+
+        <div class="card">
+          <div class="latest">
+            <!-- ЗАМЕНИ cover.jpg на обложку (в папку assets) -->
+            <img class="cover" src="./assets/cover.jpg" alt="Latest release cover" onerror="this.style.display='none';" />
+            <div>
+              <div class="title">
+                <b>Artist — Track</b>
+                <span class="tag">Single • 2026</span>
+              </div>
+              <p class="meta">Saturn Music • короткое описание релиза (1 строка)</p>
+              <div class="btn-row">
+                <a class="btn" href="#" target="_blank" rel="noreferrer">Listen</a>
+                <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Smartlink</a>
+                <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Press</a>
+              </div>
+            </div>
+          </div>
+          <p class="small" style="margin-top:12px;">
+            Совет: держи здесь всегда <b>самый свежий релиз</b>. Это улучшает доверие и конверсию в прослушивания.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ARTISTS -->
+    <div class="container">
+      <section id="artists">
+        <div class="section-head">
+          <h3>Artists</h3>
+          <p>Добавь 1–3 артистов для старта. Даже один артист — это уже «лейбл», если есть стиль и система.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="title">
+              <b>ARTIST NAME</b>
+              <span class="tag">ambient</span>
+            </div>
+            <p class="meta">Almaty • sound design • minimal</p>
+            <div class="btn-row">
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Spotify</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Instagram</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Apple Music</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="title">
+              <b>ARTIST NAME</b>
+              <span class="tag">indie</span>
+            </div>
+            <p class="meta">Короткое описание: настроение, темп, вайб.</p>
+            <div class="btn-row">
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Spotify</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Instagram</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="title">
+              <b>ARTIST NAME</b>
+              <span class="tag">electronic</span>
+            </div>
+            <p class="meta">Ещё один артист (можно убрать этот блок).</p>
+            <div class="btn-row">
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Spotify</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">YouTube</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- RELEASES -->
+    <div class="container">
+      <section id="releases">
+        <div class="section-head">
+          <h3>Releases</h3>
+          <p>Сетка релизов. Подставь ссылки на слушание.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="title">
+              <b>Artist — Track</b>
+              <span class="tag">2026</span>
+            </div>
+            <p class="meta">Single • Saturn Music</p>
+            <div class="btn-row">
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Listen</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Smartlink</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="title">
+              <b>Artist — Track</b>
+              <span class="tag">2026</span>
+            </div>
+            <p class="meta">Single • Saturn Music</p>
+            <div class="btn-row">
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Listen</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Press</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="title">
+              <b>Artist — Track</b>
+              <span class="tag">2026</span>
+            </div>
+            <p class="meta">EP • Saturn Music</p>
+            <div class="btn-row">
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Listen</a>
+              <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Credits</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="container">
+      <section id="about">
+        <div class="section-head">
+          <h3>About</h3>
+          <p>Коротко, уверенно. Без лишних обещаний — только позиция и вкус.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="title"><b>Манифест</b><span class="tag">orbit</span></div>
+            <p class="meta">
+              Мы верим, что музыка — это орбита, а не вспышка. Saturn Music поддерживает артистов,
+              которые строят свой звук последовательно и честно.
+            </p>
+          </div>
+          <div class="card">
+            <div class="title"><b>Что мы даём</b><span class="tag">system</span></div>
+            <p class="meta">
+              Дистрибуция, релиз-планирование, визуальный стиль, продвижение через плейлисты и короткий контент.
+              Работаем маленьким составом — делаем качественно.
+            </p>
+          </div>
+          <div class="card">
+            <div class="title"><b>Условия</b><span class="tag">fair</span></div>
+            <p class="meta">
+              По умолчанию — партнёрство 50/50. Авторские права остаются у артиста, master-права у лейбла на срок договора.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- PRESS KIT -->
+    <div class="container">
+      <section id="press">
+        <div class="section-head">
+          <h3>Press Kit</h3>
+          <p>Ссылка на PDF пресс-кит + контакты.</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="title"><b>Короткое описание</b><span class="tag">media</span></div>
+            <p class="meta">
+              Saturn Music — независимый лейбл, работающий с атмосферной и арт-ориентированной музыкой.
+              Фокус на качестве, идентичности и долгосрочном развитии артистов.
+            </p>
+            <div class="btn-row">
+              <!-- ЗАМЕНИ href на ссылку на твой PDF (например на сайте/диске) -->
+              <a class="btn" href="#" target="_blank" rel="noreferrer">Download PDF</a>
+              <a class="btn secondary" href="#contact">Contacts</a>
+            </div>
+          </div>
+
+          <div class="card" id="contact">
+            <div class="title"><b>Контакты</b><span class="tag">official</span></div>
+            <p class="meta">
+              Email: <a class="underline" href="mailto:contact@saturnmusic.com">contact@saturnmusic.com</a><br/>
+              Instagram: <a class="underline" href="#" target="_blank" rel="noreferrer">@saturnmusic</a><br/>
+              Spotify: <a class="underline" href="#" target="_blank" rel="noreferrer">Saturn Music</a>
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="title"><b>Brand assets</b><span class="tag">logo</span></div>
+            <p class="meta">
+              Логотип: светлая/тёмная версии + знак без текста.<br/>
+              Правило: не растягивать, не менять цвета, не добавлять эффекты.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DEMO (REAL FORM) -->
+    <div class="container">
+      <section id="demo">
+        <div class="section-head">
+          <h3>Submit Demo</h3>
+          <p>Это “настоящая” форма. Подключи Formspree за 2 минуты — и заявки будут приходить на почту.</p>
+        </div>
+
+        <div class="card">
+          <!--
+            1) Зайди на https://formspree.io, создай форму
+            2) Получишь URL вида: https://formspree.io/f/abcdwxyz
+            3) Вставь его вместо YOUR_FORMSPREE_ID
+          -->
+          <form action="https://formspree.io/f/xkogdgvl" method="POST">
+            <div>
+              <label for="name">Имя / проект</label>
+              <input id="name" name="artist" placeholder="Artist name" required />
+            </div>
+            <div>
+              <label for="email">Email для связи</label>
+              <input id="email" name="email" type="email" placeholder="name@mail.com" required />
+            </div>
+            <div style="grid-column:1 / -1;">
+              <label for="links">Ссылки на демо (обязательно)</label>
+              <input id="links" name="links" placeholder="Spotify / SoundCloud / Drive link" required />
+            </div>
+            <textarea id="note" name="message" placeholder="Коротко: жанр, настроение, что хочешь от лейбла (не обязательно)"></textarea>
+
+            <input type="hidden" name="_subject" value="Saturn Music — Demo submission" />
+
+            <div class="form-actions">
+              <button class="btn" type="submit">Send</button>
+              <span class="small">После подключения Formspree письма будут приходить сразу на твою почту.</span>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <span>© <span id="year"></span> Saturn Music</span>
+        <span class="small">Independent label • Almaty • Worldwide</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
